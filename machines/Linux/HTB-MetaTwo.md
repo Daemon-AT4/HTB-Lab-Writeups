@@ -455,7 +455,7 @@ jnelson@meta2:~$ ls
 user.txt
 
 jnelson@meta2:~$ cat user.txt
-ab881f545e7c1e198f712ed65bb6875b
+ab881{SNIP}
 ```
 
 ---
@@ -588,7 +588,7 @@ root@meta2:~# id
 uid=0(root) gid=0(root) groups=0(root)
 
 root@meta2:~# cat root.txt
-766092f038debcf47e810fd8bd0de03c
+76609{SNIP}
 ```
 
 ```
