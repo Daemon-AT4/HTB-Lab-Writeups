@@ -243,8 +243,8 @@ sqlmap -u "http://metapress.htb/wp-admin/admin-ajax.php" \
 **WordPress users extracted:**
 
 ```
-admin:$P$BGrGrgf2wToBS79i07Rk9sN4Fzk.TV.
-manager:$P$B4aNM28N0E.tMy/JIcnVMZbGcU16Q70
+admin:$P$[REDACTED]
+manager:$P$[REDACTED]
 ```
 
 ### HASH CRACKING
@@ -261,7 +261,7 @@ hashcat -m 400 wpUsers.hash --wordlist wordlists/rockyou.txt --username
 ║  PASSWORD CRACKED                                                                ║
 ╠══════════════════════════════════════════════════════════════════════════════════╣
 ║  USERNAME: manager                                                               ║
-║  PASSWORD: partylikearockstar                                                    ║
+║  PASSWORD: [REDACTED]                                                            ║
 ╚══════════════════════════════════════════════════════════════════════════════════╝
 ```
 
@@ -373,9 +373,9 @@ echo "PD9waHANCi8qKiBUaGUgbmFtZSBvZiB0aGUgZGF0YWJhc2UgZm9yIFdvcmRQcmVzcyAqLw0KZG
 ╔══════════════════════════════════════════════════════════════════════════════════╗
 ║  FTP CREDENTIALS DISCOVERED                                                      ║
 ╠══════════════════════════════════════════════════════════════════════════════════╣
-║  define( 'DB_PASSWORD', '635Aq@TdqrCwXFUZ' );                                    ║
+║  define( 'DB_PASSWORD', '[REDACTED]' );                                          ║
 ║  define( 'FTP_USER', 'metapress.htb' );                                          ║
-║  define( 'FTP_PASS', '9NYS_ii@FyL_p5M2NvJ' );                                    ║
+║  define( 'FTP_PASS', '[REDACTED]' );                                             ║
 ║  define( 'FTP_HOST', 'ftp.metapress.htb' );                                      ║
 ╚══════════════════════════════════════════════════════════════════════════════════╝
 ```
@@ -392,7 +392,7 @@ ftp 10.10.11.186
 
 ```
 Name: metapress.htb
-Password: 9NYS_ii@FyL_p5M2NvJ
+Password: [REDACTED]
 ```
 
 **FTP directory structure:**
@@ -426,7 +426,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 $mail->Host = "mail.metapress.htb";
 $mail->SMTPAuth = true;
 $mail->Username = "jnelson@metapress.htb";
-$mail->Password = "Cb4_JmWM8zUZWMu@Ys";
+$mail->Password = "[REDACTED]";
 $mail->SMTPSecure = "tls";
 $mail->Port = 587;
 ```
@@ -436,7 +436,7 @@ $mail->Port = 587;
 ║  SSH CREDENTIALS DISCOVERED                                                      ║
 ╠══════════════════════════════════════════════════════════════════════════════════╣
 ║  USERNAME: jnelson                                                               ║
-║  PASSWORD: Cb4_JmWM8zUZWMu@Ys                                                    ║
+║  PASSWORD: [REDACTED]                                                            ║
 ╚══════════════════════════════════════════════════════════════════════════════════╝
 ```
 
@@ -455,7 +455,7 @@ jnelson@meta2:~$ ls
 user.txt
 
 jnelson@meta2:~$ cat user.txt
-ab881f545e7c1e198f712ed65bb6875b
+[REDACTED]
 ```
 
 ---
@@ -529,7 +529,7 @@ Cost 1 (s2k-count) is 65011712 for all loaded hashes
 Will run 4 OpenMP threads
 Press 'q' or Ctrl-C to abort
 
-blink182         (Passpie)
+[REDACTED]       (Passpie)
 1g 0:00:00:01 DONE (2026-01-14 23:02)
 ```
 
@@ -537,7 +537,7 @@ blink182         (Passpie)
 ╔══════════════════════════════════════════════════════════════════════════════════╗
 ║  PGP PASSPHRASE CRACKED                                                          ║
 ╠══════════════════════════════════════════════════════════════════════════════════╣
-║  PASSPHRASE: blink182                                                            ║
+║  PASSPHRASE: [REDACTED]                                                          ║
 ╚══════════════════════════════════════════════════════════════════════════════════╝
 ```
 
@@ -545,7 +545,7 @@ blink182         (Passpie)
 
 ```bash
 jnelson@meta2:~/.passpie$ passpie export ~/password.db
-Passphrase: blink182
+Passphrase: [REDACTED]
 
 jnelson@meta2:~$ cat ~/password.db
 credentials:
@@ -554,13 +554,13 @@ credentials:
   login: root
   modified: 2022-06-26 08:58:15.621572
   name: ssh
-  password: !!python/unicode 'p7qfAZt4_A1xo_0x'
+  password: !!python/unicode '[REDACTED]'
 - comment: ''
   fullname: jnelson@ssh
   login: jnelson
   modified: 2022-06-26 08:58:15.514422
   name: ssh
-  password: !!python/unicode 'Cb4_JmWM8zUZWMu@Ys'
+  password: !!python/unicode '[REDACTED]'
 handler: passpie
 version: 1.0
 ```
@@ -570,7 +570,7 @@ version: 1.0
 ║  ROOT PASSWORD OBTAINED                                                          ║
 ╠══════════════════════════════════════════════════════════════════════════════════╣
 ║  USERNAME: root                                                                  ║
-║  PASSWORD: p7qfAZt4_A1xo_0x                                                      ║
+║  PASSWORD: [REDACTED]                                                            ║
 ╚══════════════════════════════════════════════════════════════════════════════════╝
 ```
 
@@ -582,13 +582,13 @@ version: 1.0
 
 ```bash
 jnelson@meta2:~$ su root
-Password: p7qfAZt4_A1xo_0x
+Password: [REDACTED]
 
 root@meta2:~# id
 uid=0(root) gid=0(root) groups=0(root)
 
 root@meta2:~# cat root.txt
-766092f038debcf47e810fd8bd0de03c
+[REDACTED]
 ```
 
 ```
@@ -622,7 +622,7 @@ root@meta2:~# cat root.txt
 ║    ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝    ╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝           ║
 ║                                                                                   ║
 ║   LOCATION: /home/jnelson/user.txt                                                ║
-║   FLAG: ab881f545e7c1e198f712ed65bb6875b                                          ║
+║   FLAG: [REDACTED]                                                                ║
 ║                                                                                   ║
 ╚═══════════════════════════════════════════════════════════════════════════════════╝
 
@@ -636,7 +636,7 @@ root@meta2:~# cat root.txt
 ║   ╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═╝       ╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝         ║
 ║                                                                                   ║
 ║   LOCATION: /root/root.txt                                                        ║
-║   FLAG: 766092f038debcf47e810fd8bd0de03c                                          ║
+║   FLAG: [REDACTED]                                                                ║
 ║                                                                                   ║
 ╚═══════════════════════════════════════════════════════════════════════════════════╝
 ```
@@ -651,14 +651,14 @@ root@meta2:~# cat root.txt
 ╠════════════╦══════════════════╦════════════════════════════════════════════╦═══════════════════════════════╣
 ║  TYPE      ║  USERNAME        ║  PASSWORD / HASH                           ║  SOURCE                       ║
 ╠════════════╬══════════════════╬════════════════════════════════════════════╬═══════════════════════════════╣
-║  WP Hash   ║  admin           ║  $P$BGrGrgf2wToBS79i07Rk9sN4Fzk.TV.        ║  SQL Injection                ║
-║  WP Hash   ║  manager         ║  $P$B4aNM28N0E.tMy/JIcnVMZbGcU16Q70        ║  SQL Injection                ║
-║  Cleartext ║  manager         ║  partylikearockstar                        ║  Hashcat Crack                ║
-║  DB Creds  ║  blog            ║  635Aq@TdqrCwXFUZ                          ║  wp-config.php (XXE)          ║
-║  FTP       ║  metapress.htb   ║  9NYS_ii@FyL_p5M2NvJ                       ║  wp-config.php (XXE)          ║
-║  SSH       ║  jnelson         ║  Cb4_JmWM8zUZWMu@Ys                        ║  send_email.php (FTP)         ║
-║  PGP Pass  ║  Passpie         ║  blink182                                  ║  John the Ripper              ║
-║  SSH       ║  root            ║  p7qfAZt4_A1xo_0x                          ║  Passpie Export               ║
+║  WP Hash   ║  admin           ║  $P$[REDACTED]                             ║  SQL Injection                ║
+║  WP Hash   ║  manager         ║  $P$[REDACTED]                             ║  SQL Injection                ║
+║  Cleartext ║  manager         ║  [REDACTED]                                ║  Hashcat Crack                ║
+║  DB Creds  ║  blog            ║  [REDACTED]                                ║  wp-config.php (XXE)          ║
+║  FTP       ║  metapress.htb   ║  [REDACTED]                                ║  wp-config.php (XXE)          ║
+║  SSH       ║  jnelson         ║  [REDACTED]                                ║  send_email.php (FTP)         ║
+║  PGP Pass  ║  Passpie         ║  [REDACTED]                                ║  John the Ripper              ║
+║  SSH       ║  root            ║  [REDACTED]                                ║  Passpie Export               ║
 ╚════════════╩══════════════════╩════════════════════════════════════════════╩═══════════════════════════════╝
 ```
 
@@ -720,7 +720,7 @@ root@meta2:~# cat root.txt
 │                                                                                  │
 │  [5] Password Manager Security                                                   │
 │      - Weak passphrases compromise all stored credentials                        │
-│      - "blink182" is a terrible passphrase for protecting root access            │
+│      - Weak passphrases are terrible for protecting root access                  │
 │                                                                                  │
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -747,7 +747,7 @@ root@meta2:~# cat root.txt
 │      - Fix: Use environment variables, secrets management, rotate passwords      │
 │                                                                                  │
 │  [4] Weak PGP Passphrase                                                         │
-│      - Issue: Password manager protected by weak passphrase "blink182"           │
+│      - Issue: Password manager protected by weak passphrase                      │
 │      - Fix: Use strong, random passphrases (20+ characters minimum)              │
 │                                                                                  │
 └──────────────────────────────────────────────────────────────────────────────────┘
