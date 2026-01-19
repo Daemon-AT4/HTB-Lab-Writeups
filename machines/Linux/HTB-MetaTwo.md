@@ -133,7 +133,34 @@ PORT   STATE SERVICE VERSION
 
 ## >_ WEB ENUMERATION
 
-### WORDPRESS VULNERABILITY SCANNING
+### TECHNOLOGY FINGERPRINTING
+
+> **Figure 1:** Website homepage showing MetaPress corporate site
+![](attachment/d9ad69cd00f14290e1983595ad25a4c6.png)
+
+> **Figure 2:** Technology stack analysis via Wappalyzer
+![](attachment/0fc6522f4524093677a6954e2d48969a.png)
+
+**Key findings from Wappalyzer:**
+- WordPress 5.6.2
+- PHP 8.0.24
+- nginx 1.18.0
+
+```
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  WORDPRESS VERSION IDENTIFIED                                                    ║
+╠══════════════════════════════════════════════════════════════════════════════════╣
+║  VERSION: 5.6.2 (Released 2021-02-22)                                            ║
+║  STATUS: Insecure - Multiple known vulnerabilities                               ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+```
+
+### WPSCAN VULNERABILITY DATABASE LOOKUP
+
+With WordPress version 5.6.2 identified, checked WPScan vulnerability database:
+
+**WPScan Database Search Results:**
+- [WordPress 5.6.2 Vulnerabilities](https://wpscan.com/wordpress/562)
 
 ```bash
 wpscan --url http://metapress.htb/ --api-token $API -e
@@ -146,20 +173,15 @@ wpscan --url http://metapress.htb/ --api-token $API -e
 ║  WordPress Version: 5.6.2 (Insecure, released 2021-02-22)                       ║
 ║                                                                                  ║
 ║  CVE-2021-29447 - XXE in Media Library (PHP 8)                                  ║
+║  - WPScan: https://wpscan.com/vulnerability/cbbe6c17-b24e-4be4-8937-c78472a138b5 ║
 ║  - Authenticated XXE affecting PHP 8                                             ║
-║  - Can read arbitrary files via crafted WAV file                                 ║
+║  - Can read arbitrary files via crafted WAV file upload                          ║
 ║                                                                                  ║
 ║  CVE-2022-0739 - BookingPress SQL Injection                                     ║
 ║  - Unauthenticated SQLi in BookingPress < 1.0.11                                ║
 ║  - Can extract database credentials and hashes                                   ║
 ╚══════════════════════════════════════════════════════════════════════════════════╝
 ```
-
-> **Figure 1:** Website homepage showing MetaPress corporate site
-![](attachment/d9ad69cd00f14290e1983595ad25a4c6.png)
-
-> **Figure 2:** Technology stack analysis via Wappalyzer
-![](attachment/0fc6522f4524093677a6954e2d48969a.png)
 
 > **Figure 3:** Events page with BookingPress plugin vulnerable to SQLi
 ![](attachment/f149bbc878f6e1f0230fa33e2929d288.png)
@@ -269,6 +291,16 @@ hashcat -m 400 wpUsers.hash --wordlist wordlists/rockyou.txt --username
 
 ## >_ XXE FILE DISCLOSURE
 
+### VULNERABILITY DISCOVERY
+
+After obtaining `manager` credentials via SQLi, the next attack vector was CVE-2021-29447 - discovered through WPScan vulnerability database lookup for WordPress 5.6.2.
+
+**WPScan Vulnerability Details:**
+- [CVE-2021-29447 - WordPress XXE via Media Library](https://wpscan.com/vulnerability/cbbe6c17-b24e-4be4-8937-c78472a138b5)
+- Affects WordPress 5.6.0 to 5.7.0 (with PHP 8)
+- Requires authenticated access (which we now have via manager account)
+- Exploited via malicious WAV file upload to Media Library
+
 ### VULNERABILITY ANALYSIS // CVE-2021-29447
 
 ```
@@ -277,10 +309,18 @@ hashcat -m 400 wpUsers.hash --wordlist wordlists/rockyou.txt --username
 ╠══════════════════════════════════════════════════════════════════════════════════╣
 ║  TYPE......: WordPress XXE in Media Library                                      ║
 ║  CVE.......: CVE-2021-29447                                                      ║
-║  SEVERITY..: CRITICAL                                                            ║
+║  WPSCAN ID.: cbbe6c17-b24e-4be4-8937-c78472a138b5                                ║
+║  SEVERITY..: CRITICAL (CVSS 9.8)                                                 ║
 ║  IMPACT....: Arbitrary file read, credential disclosure                         ║
+║  REQUIRES..: Authenticated access (Contributor+ role)                            ║
 ╚══════════════════════════════════════════════════════════════════════════════════╝
 ```
+
+**Attack Prerequisites:**
+1. ✅ WordPress version 5.6.2 (vulnerable)
+2. ✅ PHP 8.0.24 (required for XXE parsing)
+3. ✅ Authenticated user with upload permissions (manager account)
+4. ✅ Media Library access
 
 ### CREATING THE XXE PAYLOAD
 
@@ -758,12 +798,16 @@ root@meta2:~# cat root.txt
 ## >_ REFERENCES
 
 **Vulnerabilities:**
-- [CVE-2021-29447 - WordPress XXE](https://blog.sonarsource.com/wordpress-xxe-security-vulnerability/)
-- [CVE-2022-0739 - BookingPress SQLi](https://wpscan.com/vulnerability/388cd42d-b61a-42a4-8604-99b812db2357)
+- [CVE-2021-29447 - WordPress XXE (WPScan Database)](https://wpscan.com/vulnerability/cbbe6c17-b24e-4be4-8937-c78472a138b5)
+- [CVE-2021-29447 - WordPress XXE (SonarSource Analysis)](https://blog.sonarsource.com/wordpress-xxe-security-vulnerability/)
+- [CVE-2022-0739 - BookingPress SQLi (WPScan Database)](https://wpscan.com/vulnerability/388cd42d-b61a-42a4-8604-99b812db2357)
+- [WordPress 5.6.2 Vulnerability Lookup](https://wpscan.com/wordpress/562)
 - [WordPress XXE PoC Video](https://www.youtube.com/watch?v=3NBxcmqCgt4)
 
 **Tools:**
-- [WPScan](https://github.com/wpscanteam/wpscan)
+- [WPScan - WordPress Security Scanner](https://github.com/wpscanteam/wpscan)
+- [WPScan Vulnerability Database](https://wpscan.com/)
+- [Wappalyzer - Technology Profiler](https://www.wappalyzer.com/)
 - [SQLMap](https://github.com/sqlmapproject/sqlmap)
 - [John the Ripper](https://github.com/openwall/john)
 - [Passpie Password Manager](https://github.com/marcwebbie/passpie)
