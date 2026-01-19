@@ -760,6 +760,82 @@ psexec.py -k -no-pass administrator@dc.support.htb
 
 ---
 
+## >_ POC SEARCH METHODOLOGY
+
+```
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│  HOW TO FIND EXPLOITS & POC SCRIPTS                                              │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  [1] IDENTIFY VERSION                                                            │
+│      ▸ Use nmap, nxc to fingerprint OS and services                              │
+│      ▸ Check LDAP/SMB banners for Windows version                                │
+│      ▸ Example: Windows Server 2022 Build 20348                                  │
+│                                                                                  │
+│  [2] SEARCH EXPLOIT-DB / SEARCHSPLOIT                                            │
+│      ▸ searchsploit windows server 2022                                          │
+│      ▸ searchsploit ldap                                                         │
+│      ▸ searchsploit "constrained delegation"                                     │
+│      ▸ https://www.exploit-db.com/                                               │
+│                                                                                  │
+│  [3] SEARCH CVE DATABASES                                                        │
+│      ▸ https://nvd.nist.gov/ (NIST National Vulnerability Database)              │
+│      ▸ https://cve.mitre.org/ (CVE List)                                         │
+│      ▸ https://msrc.microsoft.com/ (Microsoft Security Response Center)          │
+│                                                                                  │
+│  [4] GITHUB POC REPOSITORIES                                                     │
+│      ▸ https://github.com/fortra/impacket (Impacket - AD attacks)                │
+│      ▸ https://github.com/GhostPack/Rubeus (Kerberos attacks)                    │
+│      ▸ https://github.com/Kevin-Robertson/Powermad (Machine account creation)    │
+│      ▸ https://github.com/PowerShellMafia/PowerSploit (PowerView)                │
+│      ▸ https://github.com/nomi-sec/PoC-in-GitHub (PoC aggregator)                │
+│                                                                                  │
+│  [5] ACTIVE DIRECTORY RESOURCES                                                  │
+│      ▸ https://book.hacktricks.xyz/windows-hardening/active-directory-methodology │
+│      ▸ https://adsecurity.org/ (AD Security Blog)                                │
+│      ▸ https://www.thehacker.recipes/ (AD Attack Recipes)                        │
+│                                                                                  │
+│  [6] SECURITY RESEARCH RESOURCES                                                 │
+│      ▸ https://github.com/swisskyrepo/PayloadsAllTheThings                       │
+│      ▸ https://www.ired.team/ (Red Team Notes)                                   │
+│      ▸ https://posts.specterops.io/ (SpecterOps Blog - BloodHound creators)      │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│  VULNERABILITIES IN THIS BOX - SEARCH QUERIES                                    │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  SMB Null Session (T1021.002)                                                    │
+│  ▸ Tools: smbclient, nxc, enum4linux                                             │
+│  ▸ "SMB null session enumeration"                                                │
+│                                                                                  │
+│  LDAP Simple Bind - Credential Sniffing (T1040)                                  │
+│  ▸ Tools: tshark, Wireshark                                                      │
+│  ▸ Filter: ldap.simple                                                           │
+│  ▸ "LDAP cleartext credentials simple bind"                                      │
+│                                                                                  │
+│  Password in LDAP Attribute (T1552.001)                                          │
+│  ▸ Tool: ldapsearch                                                              │
+│  ▸ "password stored in ldap description info attribute"                          │
+│  ▸ Check: info, description, comment attributes                                  │
+│                                                                                  │
+│  GenericAll ACL Abuse                                                            │
+│  ▸ Tool: BloodHound                                                              │
+│  ▸ "GenericAll privilege escalation active directory"                            │
+│  ▸ https://bloodhound.readthedocs.io/                                            │
+│                                                                                  │
+│  Resource-Based Constrained Delegation (RBCD)                                    │
+│  ▸ Tools: Rubeus, rbcd.py (Impacket), PowerMad                                   │
+│  ▸ "RBCD attack msDS-AllowedToActOnBehalfOfOtherIdentity"                        │
+│  ▸ https://www.thehacker.recipes/ad/movement/kerberos/delegations/rbcd           │
+│  ▸ S4U2Self / S4U2Proxy attack chain                                             │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 ```
 ╔══════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                      ║

@@ -596,6 +596,76 @@ HTB{********_REDACTED_********}
 
 ---
 
+## >_ POC SEARCH METHODOLOGY
+
+```
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│  HOW TO FIND EXPLOITS & POC SCRIPTS                                              │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  [1] IDENTIFY VERSION                                                            │
+│      ▸ Use nmap, nxc to fingerprint OS and services                              │
+│      ▸ Check LDAP/SMB banners for Windows version                                │
+│      ▸ Example: Windows Server 2019, Kerberos 5                                  │
+│                                                                                  │
+│  [2] SEARCH EXPLOIT-DB / SEARCHSPLOIT                                            │
+│      ▸ searchsploit windows server 2019                                          │
+│      ▸ searchsploit kerberos                                                     │
+│      ▸ searchsploit active directory                                             │
+│      ▸ https://www.exploit-db.com/                                               │
+│                                                                                  │
+│  [3] SEARCH CVE DATABASES                                                        │
+│      ▸ https://nvd.nist.gov/ (NIST National Vulnerability Database)              │
+│      ▸ https://cve.mitre.org/ (CVE List)                                         │
+│      ▸ https://msrc.microsoft.com/ (Microsoft Security Response Center)          │
+│                                                                                  │
+│  [4] GITHUB POC REPOSITORIES                                                     │
+│      ▸ https://github.com/fortra/impacket (Impacket - AD attacks)                │
+│      ▸ https://github.com/GhostPack/Rubeus (Kerberos attacks)                    │
+│      ▸ https://github.com/nomi-sec/PoC-in-GitHub (PoC aggregator)                │
+│      ▸ https://github.com/trickest/cve (CVE PoC collection)                      │
+│                                                                                  │
+│  [5] ACTIVE DIRECTORY RESOURCES                                                  │
+│      ▸ https://book.hacktricks.xyz/windows-hardening/active-directory-methodology │
+│      ▸ https://adsecurity.org/ (AD Security Blog)                                │
+│      ▸ https://www.thehacker.recipes/ (AD Attack Recipes)                        │
+│                                                                                  │
+│  [6] SECURITY RESEARCH RESOURCES                                                 │
+│      ▸ https://github.com/swisskyrepo/PayloadsAllTheThings                       │
+│      ▸ https://www.ired.team/ (Red Team Notes)                                   │
+│      ▸ https://pentestlab.blog/ (Pentestlab Blog)                                │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│  VULNERABILITIES IN THIS BOX - SEARCH QUERIES                                    │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  AS-REP Roasting (T1558.004)                                                     │
+│  ▸ Tool: GetNPUsers.py (Impacket)                                                │
+│  ▸ https://github.com/fortra/impacket/blob/master/examples/GetNPUsers.py         │
+│  ▸ "AS-REP Roasting" kerberos pre-authentication                                 │
+│  ▸ Hashcat mode: 18200                                                           │
+│                                                                                  │
+│  AutoLogon Credentials (T1552.002)                                               │
+│  ▸ Tool: WinPEAS, reg query                                                      │
+│  ▸ "windows autologon password registry"                                         │
+│  ▸ HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon                    │
+│                                                                                  │
+│  DCSync Attack (T1003.006)                                                       │
+│  ▸ Tool: secretsdump.py (Impacket)                                               │
+│  ▸ https://github.com/fortra/impacket/blob/master/examples/secretsdump.py        │
+│  ▸ "DCSync attack" DS-Replication-Get-Changes                                    │
+│                                                                                  │
+│  Pass-the-Hash (T1550.002)                                                       │
+│  ▸ Tools: evil-winrm, psexec.py, wmiexec.py                                      │
+│  ▸ "pass the hash" NTLM authentication                                           │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 ```
 ╔══════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                      ║

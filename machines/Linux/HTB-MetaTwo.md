@@ -819,6 +819,70 @@ root@meta2:~# cat root.txt
 
 ---
 
+## >_ POC SEARCH METHODOLOGY
+
+```
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│  HOW TO FIND EXPLOITS & POC SCRIPTS                                              │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  [1] IDENTIFY VERSION                                                            │
+│      ▸ Use nmap, wappalyzer, banner grabbing to find service versions            │
+│      ▸ Check /readme.html, /license.txt for CMS versions                         │
+│      ▸ Example: WordPress 5.6.2, BookingPress < 1.0.11                           │
+│                                                                                  │
+│  [2] SEARCH EXPLOIT-DB / SEARCHSPLOIT                                            │
+│      ▸ searchsploit wordpress 5.6                                                │
+│      ▸ searchsploit bookingpress                                                 │
+│      ▸ searchsploit proftpd                                                      │
+│      ▸ https://www.exploit-db.com/                                               │
+│                                                                                  │
+│  [3] SEARCH CVE DATABASES                                                        │
+│      ▸ https://nvd.nist.gov/ (NIST National Vulnerability Database)              │
+│      ▸ https://cve.mitre.org/ (CVE List)                                         │
+│      ▸ https://cvedetails.com/ (CVE Details with PoC links)                      │
+│      ▸ Search: "CVE-2022-0739", "CVE-2021-29447"                                 │
+│                                                                                  │
+│  [4] GITHUB POC REPOSITORIES                                                     │
+│      ▸ Search: site:github.com CVE-2022-0739                                     │
+│      ▸ https://github.com/nomi-sec/PoC-in-GitHub (PoC aggregator)                │
+│      ▸ https://github.com/trickest/cve (CVE PoC collection)                      │
+│                                                                                  │
+│  [5] WORDPRESS-SPECIFIC RESOURCES                                                │
+│      ▸ https://wpscan.com/ (WPScan Vulnerability Database)                       │
+│      ▸ https://wpscan.com/wordpress/562 (WP 5.6.2 vulnerabilities)               │
+│      ▸ wpscan --url <target> --api-token <token> -e vp,vt                        │
+│                                                                                  │
+│  [6] SECURITY RESEARCH RESOURCES                                                 │
+│      ▸ https://book.hacktricks.xyz/ (HackTricks)                                 │
+│      ▸ https://github.com/swisskyrepo/PayloadsAllTheThings                       │
+│      ▸ https://pentestmonkey.net/                                                │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│  VULNERABILITIES IN THIS BOX - SEARCH QUERIES                                    │
+├──────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                  │
+│  CVE-2022-0739 (BookingPress SQLi)                                               │
+│  ▸ searchsploit bookingpress                                                     │
+│  ▸ site:github.com CVE-2022-0739 exploit                                         │
+│  ▸ https://wpscan.com/vulnerability/388cd42d-b61a-42a4-8604-99b812db2357         │
+│                                                                                  │
+│  CVE-2021-29447 (WordPress XXE)                                                  │
+│  ▸ site:github.com CVE-2021-29447 poc wav                                        │
+│  ▸ https://wpscan.com/vulnerability/cbbe6c17-b24e-4be4-8937-c78472a138b5         │
+│  ▸ "wordpress xxe wav file" php 8                                                │
+│                                                                                  │
+│  Passpie PGP Cracking                                                            │
+│  ▸ gpg2john + john the ripper                                                    │
+│  ▸ "passpie password manager crack"                                              │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
 ```
 ╔══════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                      ║
