@@ -48,6 +48,7 @@
 |:--------|:----------:|:--------------|:------:|
 | [Support](machines/windows/Support/HTB_Lab_AD_Support.md) | ![Easy](https://img.shields.io/badge/-EASY-brightgreen?style=flat-square) | LDAP + GenericAll + RBCD | `[PWNED]` |
 | [Sauna](machines/windows/Sauna/HTB-Sauna.md) | ![Easy](https://img.shields.io/badge/-EASY-brightgreen?style=flat-square) | AS-REP Roasting + DCSync | `[PWNED]` |
+| [Timelapse](machines/windows/Timelapse/HTB-Timelapse.md) | ![Easy](https://img.shields.io/badge/-EASY-brightgreen?style=flat-square) | SMB + ZIP/PFX Cracking + LAPS | `[PWNED]` |
 
 ### 🐧 Linux Machines
 
@@ -83,6 +84,10 @@
 │  [+] XML External Entity (XXE) Injection                                        │
 │  [+] Password Manager Exploitation (Passpie)                                    │
 │  [+] PGP Key Cracking                                                           │
+│  [+] ZIP / PFX Password Cracking (John the Ripper)                              │
+│  [+] Certificate-Based WinRM Authentication                                     │
+│  [+] PowerShell History Credential Mining                                       │
+│  [+] LAPS Password Extraction (LAPS_Readers Abuse)                              │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -120,10 +125,10 @@
 ║   📊 PWNED MACHINES                                                          ║
 ║   ════════════════════════════════════════════════════════════════           ║
 ║                                                                              ║
-║   TOTAL......: 3                                                             ║
-║   WINDOWS....: 2                                                             ║
+║   TOTAL......: 4                                                             ║
+║   WINDOWS....: 3                                                             ║
 ║   LINUX......: 1                                                             ║
-║   ACTIVE DIR.: 2                                                             ║
+║   ACTIVE DIR.: 3                                                             ║
 ║                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 ```
